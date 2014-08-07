@@ -9,8 +9,6 @@ Twitter
 	twitter_combined.txt, twitter
 Higs Meteor Tweets
 	higgs-social_network.edgelist, higgs
-Social Epinions
-	soc-Epinions1.txt, epinions
 Oregon Route Views
 	oregon1.txt, oregon
 Physics Phenomenology
