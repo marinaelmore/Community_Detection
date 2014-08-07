@@ -137,7 +137,6 @@ $(function() {
                     
                  }).done(function (){
                     load_progress_bar(0, 10);
-                
 
                      setTimeout(function () { 
                         $.ajax({
@@ -152,9 +151,9 @@ $(function() {
                      });
                     }, 2000);
                 });
+
         }else if (d_selected == "d_null" && v_selected != "v_null"){
         var input_dict = return_input_dict(v_selected);
-         console.log("Running on existing scripts");
          
          $.ajax({
             type: 'GET',
@@ -163,9 +162,11 @@ $(function() {
             success: function() {
                 console.log("calls parsefile success");
                 var new_url = "displayGraph.html?me=" + input_dict["dataset"] + "_0";
-                 window.location.href = new_url;
+                window.location.href = new_url;
             }
         });
+     }else{
+        alert("Please only select one option.");
      }
  }
 

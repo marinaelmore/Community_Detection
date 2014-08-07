@@ -1,5 +1,4 @@
-oregon_0.txt
-oregon_1.txt
-oregon_2.txt
-oregon_3.txt
-oregon_4.txt
+facebook_0.txt
+facebook_1.txt
+facebook_2.txt
+facebook_3.txt
