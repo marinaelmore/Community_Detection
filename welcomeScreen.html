@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="description" content="">
+ <meta name="author" content="">
+ <link rel="icon" href="../../favicon.ico">
+
+ <title>Community Detection</title>
+
+ <link href=http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css rel=stylesheet>
+ <link href=http://bootswatch.com/cosmo/bootstrap.min.css rel=stylesheet type=text/css>
+ <link href=//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css rel=stylesheet>
+ <script src=http://code.jquery.com/jquery-1.8.2.min.js></script>
+ <script src=/js/tangelo.js></script>
+ <script src=callParsefile.js></script>
+
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/~armysummer/community_detection/bootstrap-select/bootstrap-select.js"></script>
+ <link rel="stylesheet" type="text/css" href="/~armysummer/community_detection/bootstrap-select/bootstrap-select.css">
+
+ <!-- 3.0 -->
+ <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+ <link href="./cover.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+      <div class="cover-container">
+
+        <div class="masthead clearfix">
+          <div class="inner">
+            <h1 class="cover-heading">Community Detection</h1>
+            <p class="lead">This program runs the <a href="http://arxiv.org/pdf/0803.0476v2.pdf" target="_blank"> Louvain Algorithum </a>to rapidly detect and unfold communities in large networks using the Delite domain specific language. 
+          </div>
+        </div>
+
+        <h3 class="inner cover">Display Options</h3>
+
+        <div class="inner cover" id="inner_cover">
+          <form class="form-horizontal" role="form">
+
+            <div class = "form-group">
+                <div class="col-sm-offset-3 col-sm-2 no_right_padding">
+                   <label for="d_select">Run Community<br>Detection</label>
+                  <select class="selectpicker show-tick" data-width="120px" id="d_select">
+                    <option id="d_null"> No Selection</option>
+                    <option id = "d_facebook">Facebook</option>
+                    <option id = "d_twitter">Twitter</option>
+                    <option id = "d_higgs">Higgs Boson Tweets</option>
+                    <option id = "d_slashdot">Slashdot Social Network</option>
+                    <option id = "d_oregon">Oregon Route Views</option>
+                    <option id = "d_hepPh">Physics Phenomenology</option>
+                    <option id = "d_hepTh">Physics Theory Citations</option>
+                    <option id = "d_wiki">Wikipedia Vote Network</option>
+                    <option id = "d_gnutella">Gnutella Network</option>     
+                  </select>
+              </div>
+
+              <div class="col-sm-2 or_padding">
+                <label for="d_select">OR</label>
+              </div>
+
+               <div class="col-sm-2 nopadding" id="testing">
+                   <label for="v_select">View Existing<br>Graphs</label>
+                  <select class="selectpicker show-tick" data-width="120px" id="v_select">
+                    <option id="v_null"> No Selection</option>
+                  </select>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <label for="cf_text" class="col-sm-offset-2 col-sm-4 control-label">Convergence Factor</label>
+              <div class="col-sm-4">
+                <input type="input" class="form-control" id="cf_txt" placeholder="0.01" style="width:100px;" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="thread_txt" class="col-sm-offset-2 col-sm-4 control-label">Number of Threads</label>
+              <div class="col-sm-2">
+                <input type="input" class="form-control" style="width:100px;" id="thread_txt" placeholder="2">
+              </div>
+            </div>
+
+          </form>
+      </div>
+
+
+      <div class="mastfoot">
+        <a href=# class="btn btn-default btn-lg" id="graph_btn" style="display: show;"><b>Display Graph</b></a>
+        <div class="inner">
+          <label for="progress-bar" class="control-label" style="display: none;" id="progress-lbl"><font size=3>Loading Delite...</font></label>
+          <div class="progress" style="display: none;" id = "progress-bar">
+            <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 10%" id="progress-inner">
+              <span class="sr-only">20% Complete</span>
+            </div>
+          </div>
+        </div>
+        <p>AHPCRC<a href="http://ahpcrc.stanford.edu/?q=research/project/high-performance-data-analytics" target="_blank"> High Performance Data Analytics </a> by <a href="https://github.com/marinaelmore/AHPCRC-CommunityDetection" target="_blank"> Research Group </a>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<script>
+$('.selectpicker').selectpicker();
+
+function return_label(input){
+  if(input == "slashdot"){
+    return "Slashdot Social Network";
+  }else if(input == "facebook"){
+    return "Facebook";
+  }else if(input == "higgs"){
+    return "Higgs Boson Tweets";
+  }else if(input == "oregon"){
+    return "Oregon Route Views";
+  }else if(input== "twitter"){
+    return "Twitter";
+  }else if (input == "hepPh"){
+    return "Physics Phenomenology";
+  }else if(input == "hepTh"){
+    return "Physics Theory Citations";
+  }else if(input == "wiki"){
+    return("Wikipedia Vote Network");
+  }else if (input == "gnutella"){
+    return "Gnutella Network";
+  }
+  return "";
+}
+   $.ajax({
+      type: 'GET',
+      url: "getFilesInDir?me=" + "fileList.txt" + ":" + "input",
+
+      success: function() {
+        console.log("getsFiles");
+        var label = "";
+        var id = ""
+        $.get('fileList.txt', function(data){
+            var lines = data.split('\n');
+            var select = document.getElementById('v_select');
+            console.log(select);
+            for(var i = 0; i <lines.length-1; i++){
+              var opt = document.createElement('option');
+              var id = "v_" + lines[i];
+              var label = return_label(lines[i]);
+              opt.setAttribute("id", id);
+              opt.innerHTML = label;
+              select.appendChild(opt);
+              $(select).selectpicker('refresh');
+            }
+        });
+      }
+    });
+</script>
+
+
+</body>
+
+</html>

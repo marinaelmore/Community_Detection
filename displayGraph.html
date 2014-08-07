@@ -1,0 +1,106 @@
+<!doctype html>
+<meta charset=utf-8>
+
+<title>Community Detection</title>
+
+<style>
+.node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+
+
+.link {
+    stroke: #999;
+    stroke-opacity: .6;
+}
+html, body {
+    height: window.innerHeight;
+}
+</style>
+
+<link href=http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css rel=stylesheet>
+<link href=http://bootswatch.com/cosmo/bootstrap.min.css rel=stylesheet type=text/css>
+<link href=//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css rel=stylesheet>
+<script src=https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false></script>
+<script src=http://d3js.org/d3.v3.min.js></script>
+<script src=http://d3js.org/topojson.v1.min.js></script>
+<script src=http://trifacta.github.io/vega/releases/v1.3.3/vega.min.js></script>
+<script src=http://code.jquery.com/jquery-1.8.2.min.js></script>
+<script src=http://code.jquery.com/ui/1.9.1/jquery-ui.min.js></script>
+<script src=http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js></script>
+<script src=/js/tangelo.js></script>
+
+<body>
+
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><font size=5 color = #999>Community Detection</font></a>
+                <a class="navbar-brand" href= welcomeScreen.html ><font size=4>Home</font> </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><font size=4>View Layers</font><span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" id="dropdown_alg">
+                            <li class="dropdown-header">Algorithums</li>
+                        </ul>
+                    </li>
+                </ul>
+    <script> 
+        var queryString = window.location.search;
+        var input = "";
+        var param = "";
+        var dataset = "";
+        var dataset_length = 0;
+        if(queryString != ""){
+             param = queryString.substring(4);
+            //console.log(param);
+             dataset = param.substring(0, param.length-2);
+             //console.log(dataset);
+             input = "/~armysummer/community_detection/output/" + dataset + "/" + param + ".json";
+        }
+
+        $.ajax({
+        type: 'GET',
+        url: "getFilesInDir?me=numLayers.txt:input/" + dataset,
+
+          success: function() {
+            console.log("getsFiles");
+            var label = "";
+            var id = ""
+            $.get('numLayers.txt', function(data){
+                var lines = data.split('\n');
+                dataset_length = lines.length;
+                var dropdown = document.getElementById("dropdown_alg");
+                for(var i = 1; i < dataset_length; i++){
+                    var list = document.createElement('li');
+                    var layer = document.createElement('a');
+                    var elem_id = "layer_" + i.toString();
+                    var new_url="displayGraph.html?me=" + dataset + "_" + (i-1).toString();
+                    layer.innerHTML = "Layer " + i.toString();
+                    layer.setAttribute("href",new_url);
+                    layer.setAttribute("id", elem_id);
+                    list.appendChild(layer);
+                    console.log(list);
+                    dropdown.appendChild(list);
+                }
+            });
+          }
+        });
+    </script>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graph Input Data from separate Javascript file <displaygraph.js> -->
+    <script src = displaygraph.js> graphData(input); </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</body>
+<div id=content></div>

@@ -1,0 +1,23 @@
+These are the datasets that Community Detection currently has access to:
+
+Name of Dataset:
+	textfile, datasetId
+
+Facebook:
+	facebook_combined.txt, facebook
+Twitter
+	twitter_combined.txt, twitter
+Higs Meteor Tweets
+	higgs-social_network.edgelist, higgs
+Social Epinions
+	soc-Epinions1.txt, epinions
+Oregon Route Views
+	oregon1.txt, oregon
+Physics Phenomenology
+	hepPh.txt, hepPh
+Physics Theory Citations
+	hepTh.txt, hepTh
+Wikipedia Vote Network
+	wiki-Vote.txt, wiki
+Gnutella
+	p2p-Gnutella04.txt, gnutella
