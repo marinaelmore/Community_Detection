@@ -1,9 +1,8 @@
 import sys, os,commands
 def main():
-	run("twitter_combined.txt:twitter:0.01:4")
+	run("facebook_combined.txt:facebook:0.01:4")
 
 def run(me=""):
-	sys.stdout = open('testing.txt', 'w')
 	textFile, dataSet, convergence, thread = me.split(':');
 	
 	inputDirectory = "/home/armysummer/tangelo_html/community_detection/input/"+dataSet+"/"

@@ -90,7 +90,7 @@ function return_input_dict(chosen_graph){
 
 function load_progress_bar(initial_time, timestep){
     var progress = initial_time;
-    while ($('#progress-inner').attr('style') != "width: 100%") {
+    while ($('#progress-inner').attr('style') != "width: 90%") {
         $('#progress-inner').attr('style', 'width: ' + progress + '%');
             progress += timestep;
     }

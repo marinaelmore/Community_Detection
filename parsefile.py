@@ -189,7 +189,7 @@ class Graph:
 
 		for line in b.readlines():
 			lineCount=lineCount+1
-			if not line.lstrip().startswith('n') and not line.lstrip().startswith('o'):
+			if not line.lstrip().startswith('N') and not line.lstrip().startswith('O'):
 				parts = line.split()
 				node1=parts[0]
 				node2=parts[1]

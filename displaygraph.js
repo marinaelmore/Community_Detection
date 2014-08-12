@@ -98,12 +98,11 @@ function graphData(input) {
                         .attr('width', 200)
                         .attr('height', 250)
                         .append("xhtml:body")
-                         //.html('<div style="width: 150px;">This is some information about whatever</div>')
 
          g.transition().duration(500).attr("transform" ,"scale(1)");
 
 
-             $.get('textfile.txt', function(data){
+            $.get('textfile.txt', function(data){
                     var text_old = document.getElementById("text");
                     text.attr('style', 'width:150px');
                     text.html(data);

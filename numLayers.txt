@@ -1,6 +1,2 @@
-hepPh_0.txt
-hepPh_1.txt
-hepPh_2.txt
-hepPh_3.txt
-hepPh_4.txt
-hepPh_5.txt
+facebook_0.txt
+facebook_stat.txt
