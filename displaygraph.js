@@ -1,28 +1,39 @@
-function graphData(input) {
+/* FILE: displaygraph.js
+ * AUTHORS: Marina Elmore, Jennifer Hu
+ * AHPCRC Summmer Institute 2014
+ -------------------------------------------------
+ * This Javascript function displays a force-directed graph of the dataset
+ * selected by the client. It also creates a textbox that details the statitics
+ * for each graph, given a perspective to the efficacy of the Louvain Algorithm
+ */
 
-    if (input != "") {
-
+function graphData(input, textfile) {
+        //Getting window size and width
         var window_width = $(window).innerWidth(),
-            window_height = $(window).innerHeight()
+            window_height = $(window).height()
 
+        //Colors
         var color = d3.scale.category20();
 
+        //Setting force
         var force = d3.layout.force()
             .charge(-120)
             .linkDistance(200)
             .size([window_width, window_height]);
 
+        //Resize Function (for recentering the graph when the window is changed)
         $(window).resize(function () {
                 width = $(window).innerWidth();
-                height = $(window).innerHeight();
+                height = $(window).height();
                 force.size([width, height]);
                 force.start();
         });
 
         var svg = d3.select("body").append("svg")
             .attr("width", $(window).innerWidth())
-            .attr("height", $(window).innerHeight());
+            .attr("height", $(window).height());
 
+        //Created the graph from the JSON file passed into the function
         d3.json(input, function(error, graph) {
             force
                 .nodes(graph.nodes)
@@ -54,11 +65,6 @@ function graphData(input) {
                 })
                 .call(force.drag);
 
-            node.append("text")
-                .attr("class", "nodetext")
-                .attr("dx", 12)
-                .attr("dy", ".35em")
-                .text(function(d) {return "marina"});
 
 
             force.on("tick", function() {
@@ -82,9 +88,44 @@ function graphData(input) {
                         return d.y;
                     });
             });
+
+        
+        //Creating the textbox with statistics about each graph iteration
+        var g = svg.append('g').attr("transform" ,"scale(0)").attr('id', "textbox_g");
+        var rect = g.append('rect')
+                        .attr('id', 'textbox')
+                        .attr('width', 210)
+                        .attr('height', 250)
+                        .attr('x', 20)
+                        .attr('y', 100)
+                        .style('fill', 'white')
+                        .style("fill-opacity", 0.6)
+                        .attr('stroke', 'black')
+        var text = g.append('foreignObject')
+                        .attr('id','text')
+                        .attr('x', 45)
+                        .attr('y', 102)
+                        .attr('width', 225)
+                        .attr('height', 250)
+                        .style("background", "transparent");
+
+         g.transition().duration(500).attr("transform" ,"scale(1)");
+
+         //Ajax call to get statistics from various textfiles
+         $.ajax({
+              type: 'GET',
+              url: "getStatistics?me=" + textfile,
+
+              success: function() {
+                $.get('stats.txt', function(data){
+                    var text_old = document.getElementById("text");
+                    text.attr('style', 'width:200px');
+                    text.html(data);
+                });
+              }
+            })
         });
-    }
+    
 }
-
-
-graphData(input);
+//Calling the graph data function
+graphData(input, textfile);

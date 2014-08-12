@@ -1,0 +1,5 @@
+<p><b>Facebook Level 4</b><p><p><b>Initial Statistics:</b><br>Number of Nodes: 4039<br>Number of Edges: 176468
+</p>
+<p><b>Current Statistics:</b><br>Number of Nodes: 16<br>Number of Edges: 84
+<br>Old Modulairty: 0.8337641535395963<br>New Modularity: 0.8337641535395963
+</p>

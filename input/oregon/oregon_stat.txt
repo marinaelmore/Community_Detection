@@ -1,0 +1,1 @@
+Number of Nodes: 10670 Number of Edges: 44004
