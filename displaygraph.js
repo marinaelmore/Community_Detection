@@ -1,16 +1,27 @@
+/* FILE: displaygraph.js
+ * AUTHORS: Marina Elmore, Jennifer Hu
+ * AHPCRC Summmer Institute 2014
+ -------------------------------------------------
+ * This Javascript function displays a force-directed graph of the dataset
+ * selected by the client. It also creates a textbox that details the statitics
+ * for each graph, given a perspective to the efficacy of the Louvain Algorithm
+ */
+
 function graphData(input, textfile) {
-    if (input != "") {
-        console.log(textfile);
+        //Getting window size and width
         var window_width = $(window).innerWidth(),
             window_height = $(window).height()
 
+        //Colors
         var color = d3.scale.category20();
 
+        //Setting force
         var force = d3.layout.force()
             .charge(-120)
             .linkDistance(200)
             .size([window_width, window_height]);
 
+        //Resize Function (for recentering the graph when the window is changed)
         $(window).resize(function () {
                 width = $(window).innerWidth();
                 height = $(window).height();
@@ -22,9 +33,7 @@ function graphData(input, textfile) {
             .attr("width", $(window).innerWidth())
             .attr("height", $(window).height());
 
-        
-        
-
+        //Created the graph from the JSON file passed into the function
         d3.json(input, function(error, graph) {
             force
                 .nodes(graph.nodes)
@@ -81,7 +90,7 @@ function graphData(input, textfile) {
             });
 
         
-
+        //Creating the textbox with statistics about each graph iteration
         var g = svg.append('g').attr("transform" ,"scale(0)").attr('id', "textbox_g");
         var rect = g.append('rect')
                         .attr('id', 'textbox')
@@ -102,6 +111,7 @@ function graphData(input, textfile) {
 
          g.transition().duration(500).attr("transform" ,"scale(1)");
 
+         //Ajax call to get statistics from various textfiles
          $.ajax({
               type: 'GET',
               url: "getStatistics?me=" + textfile,
@@ -115,8 +125,7 @@ function graphData(input, textfile) {
               }
             })
         });
-    }
+    
 }
-
-
+//Calling the graph data function
 graphData(input, textfile);

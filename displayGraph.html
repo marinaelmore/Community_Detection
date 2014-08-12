@@ -1,3 +1,13 @@
+<!-- 
+/* FILE: displayGraph.html
+ * AUTHORS: Marina Elmore, Jennifer Hu
+ * AHPCRC Summmer Institute 2014
+ *
+ * This file provides the html backbone for the graphical display interface.
+ * It is written using bootstrap components and uses Javascript to dyanamically
+ * populate the menus
+ */ -->
+
 <!doctype html>
 <meta charset=utf-8>
 
@@ -8,14 +18,11 @@
     stroke: #fff;
     stroke-width: 1.5px;
 }
-
 .rectangle {
     fill: none;
     stroke-width:3;
     stroke:rgb(0,0,0);
 }
-
-
 .link {
     stroke: #999;
     stroke-opacity: .6;
@@ -61,11 +68,16 @@ html, body {
                     </li>
                 </ul>
     <script> 
+        //Variables
         var queryString = window.location.search;
         var input = "";
         var param = "";
         var dataset = "";
         var dataset_length = 0;
+        var textfile = "";
+
+        // Determining correct dataset, input file, 
+        // and text file from query string
         if(queryString != ""){
              param = queryString.substring(4);
              dataset = param.substring(0, param.length-2);
@@ -73,6 +85,8 @@ html, body {
              textfile = dataset + "/" + param + ".txt";
         }
 
+        //Ajax call to populate the drop down menu with 
+        //the correct number of Delite Iterations
         $.ajax({
         type: 'GET',
         url: "getFilesInDir?me=numLayers.txt:input/" + dataset,

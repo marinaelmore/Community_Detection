@@ -1,4 +1,11 @@
-import sys, getopt, re, json, io, math, os, tangelo, callDelite
+# FILE: getFilesinDir.py
+# AUTHORS: Marina Elmore, Jennifer Hu
+# AHPCRC Summmer Institute 2014
+# -------------------------------------------------
+#  This program creates a text file listing all the values in the current directory.
+#
+
+import sys, os, tangelo
 
 def main():
 	run("numLayers.txt:input/facebook")

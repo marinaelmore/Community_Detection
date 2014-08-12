@@ -1,5 +1,5 @@
-number of nodes: 494 number of edges: 3630
-old mod: 0.6159650986457929 new mod: 0.6486922227206322
+Number of Nodes: 494 Number of Edges: 3630
+Old Modularity: 0.6159650986457929 New Modularity: 0.6486922227206322
 0	0	64284.0
 0	1	6684.0
 0	2	2746.0

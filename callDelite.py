@@ -1,3 +1,13 @@
+#  FILE: callDelite.py
+#  AUTHORS: Marina Elmore, Jennifer Hu
+#  AHPCRC Summmer Institute 2014
+#  -------------------------------------------------
+#  This file calls Delite by navigating to the correct directory
+#  and booting off Delite on the dataset chosen by the client. 
+#  This program generates text files of source-target files that
+#  are later passed on to the frontend graphing program
+
+
 import sys, os,commands
 def main():
 	run("facebook_combined.txt:facebook:0.01:4")
