@@ -1,0 +1,5 @@
+<p><b>Facebook Level 1</b><p><p><b>Initial Statistics:</b><br>Number of Nodes: 4039<br>Number of Edges: 176468
+</p>
+<p><b>Current Statistics:</b><br>Number of Nodes: 77<br>Number of Edges: 414
+<br>Old Modulairty: -6.039046004050363E-4<br>New Modularity: 0.8259163442539899
+</p>

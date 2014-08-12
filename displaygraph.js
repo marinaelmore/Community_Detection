@@ -1,6 +1,6 @@
-function graphData(input) {
+function graphData(input, textfile) {
     if (input != "") {
-
+        console.log(textfile);
         var window_width = $(window).innerWidth(),
             window_height = $(window).height()
 
@@ -85,31 +85,38 @@ function graphData(input) {
         var g = svg.append('g').attr("transform" ,"scale(0)").attr('id', "textbox_g");
         var rect = g.append('rect')
                         .attr('id', 'textbox')
-                        .attr('width', 200)
+                        .attr('width', 210)
                         .attr('height', 250)
-                        .attr('x', 40)
+                        .attr('x', 20)
                         .attr('y', 100)
-                        .style('fill', 'none')
+                        .style('fill', 'white')
+                        .style("fill-opacity", 0.6)
                         .attr('stroke', 'black')
         var text = g.append('foreignObject')
                         .attr('id','text')
-                        .attr('x', 50)
-                        .attr('y', 130)
-                        .attr('width', 200)
+                        .attr('x', 45)
+                        .attr('y', 102)
+                        .attr('width', 225)
                         .attr('height', 250)
-                        .append("xhtml:body")
+                        .style("background", "transparent");
 
          g.transition().duration(500).attr("transform" ,"scale(1)");
 
+         $.ajax({
+              type: 'GET',
+              url: "getStatistics?me=" + textfile,
 
-            $.get('textfile.txt', function(data){
+              success: function() {
+                $.get('stats.txt', function(data){
                     var text_old = document.getElementById("text");
-                    text.attr('style', 'width:150px');
+                    text.attr('style', 'width:200px');
                     text.html(data);
-            });
+                });
+              }
+            })
         });
     }
 }
 
 
-graphData(input);
+graphData(input, textfile);

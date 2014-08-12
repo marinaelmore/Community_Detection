@@ -70,6 +70,7 @@ html, body {
              param = queryString.substring(4);
              dataset = param.substring(0, param.length-2);
              input = "/~armysummer/community_detection/output/" + dataset + "/" + param + ".json";
+             textfile = dataset + "/" + param + ".txt";
         }
 
         $.ajax({
@@ -84,7 +85,7 @@ html, body {
                 var lines = data.split('\n');
                 dataset_length = lines.length;
                 var dropdown = document.getElementById("dropdown_alg");
-                for(var i = 1; i < dataset_length; i++){
+                for(var i = 1; i < dataset_length-1; i++){
                     var list = document.createElement('li');
                     var layer = document.createElement('a');
                     var elem_id = "layer_" + i.toString();
@@ -105,7 +106,7 @@ html, body {
     </div>
 
     <!-- Graph Input Data from separate Javascript file <displaygraph.js> -->
-    <script src = displaygraph.js> graphData(input); </script>
+    <script src = displaygraph.js> graphData(input, textfile); </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </body>
 <div id=content></div>

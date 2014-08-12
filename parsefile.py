@@ -127,7 +127,7 @@
 import sys, getopt, re, json, io, math, os, tangelo, callDelite
 
 def main():
-	run("twitter")
+	run("facebook")
 
 def run(me=""):
 
