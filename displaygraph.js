@@ -1,9 +1,8 @@
 function graphData(input) {
-
     if (input != "") {
 
         var window_width = $(window).innerWidth(),
-            window_height = $(window).innerHeight()
+            window_height = $(window).height()
 
         var color = d3.scale.category20();
 
@@ -14,14 +13,17 @@ function graphData(input) {
 
         $(window).resize(function () {
                 width = $(window).innerWidth();
-                height = $(window).innerHeight();
+                height = $(window).height();
                 force.size([width, height]);
                 force.start();
         });
 
         var svg = d3.select("body").append("svg")
             .attr("width", $(window).innerWidth())
-            .attr("height", $(window).innerHeight());
+            .attr("height", $(window).height());
+
+        
+        
 
         d3.json(input, function(error, graph) {
             force
@@ -54,11 +56,6 @@ function graphData(input) {
                 })
                 .call(force.drag);
 
-            node.append("text")
-                .attr("class", "nodetext")
-                .attr("dx", 12)
-                .attr("dy", ".35em")
-                .text(function(d) {return "marina"});
 
 
             force.on("tick", function() {
@@ -81,6 +78,35 @@ function graphData(input) {
                     .attr("cy", function(d) {
                         return d.y;
                     });
+            });
+
+        
+
+        var g = svg.append('g').attr("transform" ,"scale(0)").attr('id', "textbox_g");
+        var rect = g.append('rect')
+                        .attr('id', 'textbox')
+                        .attr('width', 200)
+                        .attr('height', 250)
+                        .attr('x', 40)
+                        .attr('y', 100)
+                        .style('fill', 'none')
+                        .attr('stroke', 'black')
+        var text = g.append('foreignObject')
+                        .attr('id','text')
+                        .attr('x', 50)
+                        .attr('y', 130)
+                        .attr('width', 200)
+                        .attr('height', 250)
+                        .append("xhtml:body")
+                         //.html('<div style="width: 150px;">This is some information about whatever</div>')
+
+         g.transition().duration(500).attr("transform" ,"scale(1)");
+
+
+             $.get('textfile.txt', function(data){
+                    var text_old = document.getElementById("text");
+                    text.attr('style', 'width:150px');
+                    text.html(data);
             });
         });
     }

@@ -1,8 +1,9 @@
-import sys, os
+import sys, os,commands
 def main():
-	run("higgs-social_network.txt:higgs:0.01:4")
+	run("twitter_combined.txt:twitter:0.01:4")
 
 def run(me=""):
+	sys.stdout = open('testing.txt', 'w')
 	textFile, dataSet, convergence, thread = me.split(':');
 	
 	inputDirectory = "/home/armysummer/tangelo_html/community_detection/input/"+dataSet+"/"
@@ -21,10 +22,8 @@ def run(me=""):
 		os.system(makeFolder)
 		os.chmod(inputDirectory, 0777)
 	
-
-	os.system(delitePath)
-
-	#print delitePath
+	status, output = commands.getstatusoutput(delitePath)
+	print status, output
 	return me
 
 
