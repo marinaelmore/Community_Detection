@@ -53,7 +53,7 @@
 
 # 		b = open(file_path, 'r')
 # 		for line in b.readlines():
-# 			if not line.lstrip().startswith('n') and not line.lstrip().startswith('o'):
+# 			if not line.lstrip().startswith('N') and not line.lstrip().startswith('O'):
 # 				parts = line.split()
 # 				node1=parts[0]
 # 				node2=parts[1]
@@ -184,27 +184,31 @@ class Graph:
 
 		branch=[]
 		
-		lineCount=0
+		lineNumberCount=0
 		b = open(file_path, 'r')
 
 		for line in b.readlines():
-			lineCount=lineCount+1
-			if not line.lstrip().startswith('N') and not line.lstrip().startswith('O'):
-				parts = line.split()
+			
+			
+			parts = line.split()
+			if parts[0].isdigit():
+
+				lineNumberCount=lineNumberCount+1
+
 				node1=parts[0]
 				node2=parts[1]
 				weight=parts[2]
+
 				if len(parts)>=4 :
 					optional_value=parts[3]
-				else:
-					optional_value=None
-
-				if lineCount==3:
-					node1prev=node1
 
 				node1=int(node1)
+				node1prev=int(node1)
 				node2=int(node2)
 				weight=float(weight)
+
+				if lineNumberCount==2:
+					node1prev=node1
 
 				node1count=node1count+1
 				node2count=node2count+1
@@ -213,16 +217,16 @@ class Graph:
 				if node1 == node2:
 					selfLink[node1]=weight
 
-				if node1==node1prev:
+				if node1==node1prev or lineNumberCount == 1:
 					if node1 not in branch:
 						branch.append(node1)
 					if node2 not in branch:
 						branch.append(node2)
 
-				tempDict["" "source" ]= node1
-				tempDict["" "target"  ]= node2
-				tempDict["" "weight" ]= weight
-				List.append(tempDict.copy())
+					tempDict["" "source" ]= node1
+					tempDict["" "target"  ]= node2
+					tempDict["" "weight" ]= weight
+					List.append(tempDict.copy())
 
 				node1prev=node1
 
@@ -234,11 +238,8 @@ class Graph:
 		b.close()
 
 		self.graph["" "links"]=List
-		print "# links in graph dict", len(self.graph['links'])
 		self.graph["" "nodes"]=otherList
-		print "# nodes with more than one self link", len(self.graph['nodes'])
-		#self.graph["" "selfLoop"]=selfLink
-		#print "# selfLinks: ", len(self.graph['selfLoop'])
+		
 	
 
 	def createJsonFile(self, index, name):

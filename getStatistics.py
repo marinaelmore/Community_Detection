@@ -9,7 +9,28 @@
 
 import sys, os,commands
 def main():
-	run("facebook/facebook_1.txt")
+	run("twitter/twitter_1.txt")
+
+def return_label(input):
+	print input
+	label = ""
+	if input == "facebook":
+		label = "Facebook Social Network"
+ 	elif input ==  "higgs":
+    		label =  "Higgs Boson Tweets"
+  	elif input == "oregon":
+    		label =  "Oregon Route Views"
+   	elif input == "twitter":
+    		label =  "Twitter Social Network"
+  	elif input == "hepPh":
+    		label =  "Physics Phenomenology"
+   	elif input == "hepTh":
+    		label =  "Physics Theory Citations"
+  	elif input == "wiki":
+    		label =  "Wikipedia Vote Network"
+  	elif input == "gnutella":
+    		label =  "Gnutella Network"
+  	return label
 
 def run(me=""):
 	#Go to correct directory
@@ -18,6 +39,9 @@ def run(me=""):
 	#Get Paths
 	path = 'input/' + me;
 	dataset, input_file = me.split('/')
+	print dataset
+	label = return_label(dataset)
+	print label
 	level = int(input_file[len(input_file)-5:len(input_file)-4]) + 1
 	stat_file =  "input/" + dataset + '/' + dataset + "_stat.txt"
 	
@@ -28,7 +52,7 @@ def run(me=""):
 	
 	
 	#Add Title
-	title = dataset.title() + " Level " + str(level)
+	title = str(label + ":<br>Level " + str(level)).title()
 	final_stats.write("<p><b>" + title + "</b><p>")
 
 	final_stats.write("<p><b>Initial Statistics:</b>")

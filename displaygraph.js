@@ -95,7 +95,7 @@ function graphData(input, textfile) {
         var rect = g.append('rect')
                         .attr('id', 'textbox')
                         .attr('width', 210)
-                        .attr('height', 250)
+                        .attr('height', 270)
                         .attr('x', 20)
                         .attr('y', 100)
                         .style('fill', 'white')
@@ -106,7 +106,7 @@ function graphData(input, textfile) {
                         .attr('x', 45)
                         .attr('y', 102)
                         .attr('width', 225)
-                        .attr('height', 250)
+                        .attr('height', 270)
                         .style("background", "transparent");
 
          g.transition().duration(500).attr("transform" ,"scale(1)");
