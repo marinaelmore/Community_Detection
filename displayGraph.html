@@ -1,3 +1,13 @@
+<!-- 
+/* FILE: displayGraph.html
+ * AUTHORS: Marina Elmore, Jennifer Hu
+ * AHPCRC Summmer Institute 2014
+ *
+ * This file provides the html backbone for the graphical display interface.
+ * It is written using bootstrap components and uses Javascript to dyanamically
+ * populate the menus
+ */ -->
+
 <!doctype html>
 <meta charset=utf-8>
 
@@ -8,8 +18,11 @@
     stroke: #fff;
     stroke-width: 1.5px;
 }
-
-
+.rectangle {
+    fill: none;
+    stroke-width:3;
+    stroke:rgb(0,0,0);
+}
 .link {
     stroke: #999;
     stroke-opacity: .6;
@@ -33,7 +46,8 @@ html, body {
 
 <body>
 
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0px;">
+
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -49,24 +63,30 @@ html, body {
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><font size=4>View Layers</font><span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" id="dropdown_alg">
-                            <li class="dropdown-header">Algorithums</li>
+                            <li class="dropdown-header">Algorithm Iterations</li>
                         </ul>
                     </li>
                 </ul>
     <script> 
+        //Variables
         var queryString = window.location.search;
         var input = "";
         var param = "";
         var dataset = "";
         var dataset_length = 0;
+        var textfile = "";
+
+        // Determining correct dataset, input file, 
+        // and text file from query string
         if(queryString != ""){
              param = queryString.substring(4);
-            //console.log(param);
              dataset = param.substring(0, param.length-2);
-             //console.log(dataset);
              input = "/~armysummer/community_detection/output/" + dataset + "/" + param + ".json";
+             textfile = dataset + "/" + param + ".txt";
         }
 
+        //Ajax call to populate the drop down menu with 
+        //the correct number of Delite Iterations
         $.ajax({
         type: 'GET',
         url: "getFilesInDir?me=numLayers.txt:input/" + dataset,
@@ -79,7 +99,7 @@ html, body {
                 var lines = data.split('\n');
                 dataset_length = lines.length;
                 var dropdown = document.getElementById("dropdown_alg");
-                for(var i = 1; i < dataset_length; i++){
+                for(var i = 1; i < dataset_length-1; i++){
                     var list = document.createElement('li');
                     var layer = document.createElement('a');
                     var elem_id = "layer_" + i.toString();
@@ -100,7 +120,7 @@ html, body {
     </div>
 
     <!-- Graph Input Data from separate Javascript file <displaygraph.js> -->
-    <script src = displaygraph.js> graphData(input); </script>
+    <script src = displaygraph.js> graphData(input, textfile); </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </body>
 <div id=content></div>

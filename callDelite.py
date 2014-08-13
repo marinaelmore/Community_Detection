@@ -1,6 +1,16 @@
-import sys, os
+#  FILE: callDelite.py
+#  AUTHORS: Marina Elmore, Jennifer Hu
+#  AHPCRC Summmer Institute 2014
+#  -------------------------------------------------
+#  This file calls Delite by navigating to the correct directory
+#  and booting off Delite on the dataset chosen by the client. 
+#  This program generates text files of source-target files that
+#  are later passed on to the frontend graphing program
+
+
+import sys, os,commands
 def main():
-	run("higgs-social_network.txt:higgs:0.01:4")
+	run("facebook_combined.txt:facebook:0.01:4")
 
 def run(me=""):
 	textFile, dataSet, convergence, thread = me.split(':');
@@ -21,10 +31,8 @@ def run(me=""):
 		os.system(makeFolder)
 		os.chmod(inputDirectory, 0777)
 	
-
-	os.system(delitePath)
-
-	#print delitePath
+	status, output = commands.getstatusoutput(delitePath)
+	print status, output
 	return me
 
 

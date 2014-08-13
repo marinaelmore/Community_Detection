@@ -1,4 +1,7 @@
-higgs_0.txt
-higgs_1.txt
-higgs_2.txt
-higgs_3.txt
+twitter_0.txt
+twitter_1.txt
+twitter_2.txt
+twitter_3.txt
+twitter_4.txt
+twitter_5.txt
+twitter_stat.txt
