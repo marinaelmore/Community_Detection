@@ -1,5 +1,5 @@
 Number of Nodes: 20 Number of Edges: 106
-Old Modulairty: 0.8259163442539899 New Modularity: 0.8324956892304717
+Old Modularity: 0.8259163442539899 New Modularity: 0.8324956892304717
 0	0	33296.0
 0	1	108.0
 0	2	58.0

@@ -1,5 +1,5 @@
-<p><b>Twitter Social Network:<Br>Level 4</b><p><p><b>Initial Statistics:</b><br>Number of Nodes: 81306<br>Number of Edges: 2684606
+<p><b>Facebook Social Network:<Br>Level 4</b><p><p><b>Initial Statistics:</b><br>Number of Nodes: 4039<br>Number of Edges: 176468
 </p>
-<p><b>Current Statistics:</b><br>Number of Nodes: 86<br>Number of Edges: 1542
-<br>Old Modularity: 0.774200968408543<br>New Modularity: 0.7742163077295173
+<p><b>Current Statistics:</b><br>Number of Nodes: 16<br>Number of Edges: 84
+<br>Old Modularity: 0.8337641535395963<br>New Modularity: 0.8337641535395963
 </p>
