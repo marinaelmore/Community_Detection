@@ -18,7 +18,7 @@ def run(me=""):
 	inputDirectory = "/home/armysummer/tangelo_html/community_detection/input/"+dataSet+"/"
 	output_path = "/home/armysummer/tangelo_html/community_detection/output/"+dataSet+"/"
 	os.system('rm -rf ' + inputDirectory + '*')
-	os.system('rm -rf ' + output_path)
+	os.system('rm -rf ' + output_path + '*')
 
 	
 
